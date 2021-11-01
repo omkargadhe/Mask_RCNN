@@ -29,7 +29,6 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-DRIVE_ROOT_DIR = "/content/gdrive/MyDrive/pysource_mrcnn_pro/"
 
 
 
@@ -224,7 +223,7 @@ class CustomDataset(utils.Dataset):
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
 def load_training_model(config, project_name, init_with="coco"):
-    model_dir = os.path.join(DRIVE_ROOT_DIR, project_name)
+    model_dir = os.path.join(ROOT_DIR, project_name)
     model = modellib.MaskRCNN(mode="training", config=config,
                               model_dir=model_dir)
 
@@ -309,7 +308,7 @@ def extract_images(my_zip, output_dir):
 
 def load_test_model(num_classes, project_name):
     inference_config = InferenceConfig(num_classes)
-    model_dir = os.path.join(DRIVE_ROOT_DIR,  project_name)
+    model_dir = os.path.join(ROOT_DIR,  project_name)
     # Recreate the model in inference mode
     model = modellib.MaskRCNN(mode="inference",
                               config=inference_config,
@@ -355,7 +354,7 @@ def connect_google_drive(project_name):
     from google.colab import drive
     drive.mount('/content/gdrive')
 
-    model_dir = os.path.join(DRIVE_ROOT_DIR, project_name)
+    model_dir = os.path.join(ROOT_DIR, project_name)
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
         print("New project created {}".format(project_name))
@@ -365,7 +364,7 @@ def connect_google_drive(project_name):
     return model_dir
 
 def create_mrcnn_output_directory(project_name):
-    model_dir = os.path.join(DRIVE_ROOT_DIR,  project_name)
+    model_dir = os.path.join(ROOT_DIR,  project_name)
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
         print("New project created {}".format(project_name))
